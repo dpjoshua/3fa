@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-function Main(){
+function Main(props){
     return(
         <div>
             <h1>Welcome</h1>
@@ -13,10 +12,9 @@ function Main(){
                 <li>
                     <Link to="/Register">Register</Link>
                 </li>
-
             </ul>
         </div>
     )   
-    
 }
+
 export default Main;

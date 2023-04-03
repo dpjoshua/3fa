@@ -13,56 +13,31 @@ import Recap from "./Recap.js";
 import Dummy from "./Dummy.js";
 import ForgotPassword from "./ForgotPassword.js";
 
+import { RecoilRoot } from 'recoil'
+import LoginWrapper from "./loginWrapper.js";
+
 
 class App extends Component {
- /* constructor(props) {
-    super(props);
-
-    this.state = {
-      user: null,
-    }
-
-    this.authListener = this.authListener.bind(this);
-  }
-
-  componentDidMount() {
-    this.authListener();
-  }
-
-  authListener() {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      } else {
-        this.setState({ user: null });
-      }
-    })
-  }
-  */
 
   render() {
     return (
-      <div>
-        <Routes>
-          <Route element={<NavBar />} />
-          <Route exact path="/" element={<Main />} />
-          <Route exact path='/Otp' element={<Otp/>}/>
-          <Route exact path="/Login" element={<Login />} />
-          <Route exact path="/Register" element={<Register />} />
-          <Route exact path="/Security" element={<Security />} />
-          <Route exact path="/Home" element={<Home />} />
-          <Route exact path="/Recap" element={<Recap />} />
+      <RecoilRoot>
+        <div>
+          <Routes>
+            <Route element={<NavBar />} />
+            <Route exact path="/" element={<Main />} />
+            <Route exact path='/Otp' element={<Otp />} />
+            <Route exact path="/Login" element={<LoginWrapper />} />
+            <Route exact path="/Register" element={<Register />} />
+            <Route exact path="/Security" element={<Security />} />
+            <Route exact path="/Home" element={<Home />} />
+            <Route exact path="/Recap" element={<Recap />} />
+            <Route exact path="/Dummy" element={<Dummy />} />
+            <Route exact path="/ForgotPassword" element={<ForgotPassword />} />
 
-          <Route exact path="/Dummy" element={<Dummy />} />
-          <Route exact path="/ForgotPassword" element={<ForgotPassword />} />
-
-
-
-
-
-
-        </Routes>
-      </div>
+          </Routes>
+        </div>
+      </RecoilRoot>
     );
   }
 }
