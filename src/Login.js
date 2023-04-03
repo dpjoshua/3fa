@@ -228,14 +228,6 @@ class Login extends React.Component {
     this.props.getUserName(lg_username)
   }
 
- /* getAllInputs() {
-    return {
-      lg_password: this.state.lg_password,
-      lg_username: this.state.lg_username,
-      
-
-    }
-    }*/
     getAllInputs() {
       const inputs = {
         lg_username: this.state.lg_username,
