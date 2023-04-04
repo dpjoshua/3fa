@@ -235,11 +235,9 @@ class Login extends React.Component {
         answerOne : this.state.answerOne,
       answerTwo : this.state.answerTwo,
       answerThree : this.state.answerThree,
-     // selectedImage: this.state.selectedImage.alt
+      selectedImage: this.state.selectedImage.alt
       };
-      if (this.state.selectedImage && this.state.selectedImage.alt) {
-        inputs.selectedImageAlt = this.state.selectedImage.alt;
-      }
+     
       return inputs;
     }
     
@@ -262,9 +260,6 @@ class Login extends React.Component {
           alert("Please select an image.");
           return;
         }
-    
-
-
         if ((db_password == lg_password) && (db_answer_1 == answerOne) && (db_answer_2 == answerTwo) && (db_answer_3 == answerThree) && (db_image == selectedImage) ) {
           console.log("Login successful");
           this.setState({ isLoggedIn: true });
@@ -285,13 +280,11 @@ class Login extends React.Component {
         else if((db_answer_3 != answerThree) || (!answerThree))
         {
           alert("Invalid Answer Three")
-        }
-        else if(db_image !=selectedImage)
+        }       
+        else if(selectedImage !=db_image)
         {
-          alert("Invalid Image Selected ")
-
+          alert("Invalid selected Image")
         }
-
       } else {
         alert("No data found");
       }

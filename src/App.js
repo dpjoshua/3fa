@@ -12,6 +12,7 @@ import Recaptcha from "react-recaptcha";
 import Recap from "./Recap.js";
 import Dummy from "./Dummy.js";
 import ForgotPassword from "./ForgotPassword.js";
+import ChangePassword from "./ChangePassword.js"
 
 import { RecoilRoot } from 'recoil'
 import LoginWrapper from "./loginWrapper.js";
@@ -34,6 +35,8 @@ class App extends Component {
             <Route exact path="/Recap" element={<Recap />} />
             <Route exact path="/Dummy" element={<Dummy />} />
             <Route exact path="/ForgotPassword" element={<ForgotPassword />} />
+            <Route exact path="/ChangePassword" element={<ChangePassword />} />
+
 
           </Routes>
         </div>
