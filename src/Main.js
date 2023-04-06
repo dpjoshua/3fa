@@ -6,12 +6,12 @@ function Main(props){
         <div>
             <h1>Welcome</h1>
             <ul>
-                <li>
+                <p>
                     <Link to="/Login">Login</Link>
-                </li>
-                <li>
+                </p>
+                <p>
                     <Link to="/Register">Register</Link>
-                </li>
+                </p>
             </ul>
         </div>
     )   

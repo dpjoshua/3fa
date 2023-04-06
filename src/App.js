@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home.js'
-import Login from "./Login.js";
-import fire from './config/fire';
 import NavBar from './NavBar';
 import Main from './Main';
 import Register from './Register';
 import Security from './Security';
 import Otp from './Otp';
-import Recaptcha from "react-recaptcha";
 import Recap from "./Recap.js";
 import Dummy from "./Dummy.js";
 import ForgotPassword from "./ForgotPassword.js";

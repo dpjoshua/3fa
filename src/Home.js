@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import startFirebase from './config/firedb';
-import { set, ref, get, child, push, onValue } from 'firebase/database';
+import {  ref, push, onValue } from 'firebase/database';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import {  useRecoilValue } from 'recoil';
 import { userData } from './state';
-import ChangePassword from "./ChangePassword.js"
 import { Link } from "react-router-dom";
-
+import { useNavigate  } from 'react-router-dom';
 
 
 
@@ -73,7 +72,16 @@ function Home() {
   // get the latest udpated userData
   const userVal = useRecoilValue(userData);
   console.log('testing =====>>>', userVal)
-  const converted_user = JSON.stringify(userVal);
+  //const converted_user = JSON.stringify(userVal);
+  const userName = userVal.default?.name || '';
+  const converted_user = userName.toString();
+  const navigate = useNavigate();
+
+
+  
+  
+
+
 
 
 
@@ -129,6 +137,14 @@ function Home() {
       });
   };
 
+  const handleLogout = async () => {
+    try {
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const getData = () => {
     if (!db) {
@@ -157,10 +173,10 @@ function Home() {
 
   return (
     <div className="bc">
-      <h1>Welcome </h1>
-      <div>
-        <div>Username {userVal.default?.name}</div>
-      </div>
+            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+
+      <h1>Welcome {userVal.default?.name}</h1>
+
       <div>
         <div>Date</div>
         <input

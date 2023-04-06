@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { Component } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import startFirebase from './config/firedb';
 import { set, ref, get, child } from 'firebase/database';
@@ -12,7 +12,8 @@ import image6 from './Images/image6.jpg';
 import image7 from './Images/image7.jpg';
 import image8 from './Images/image8.jpg';
 import image9 from './Images/image9.jpg';
-import strings from './myString';
+import { Link } from "react-router-dom";
+
 
 
 class Register extends React.Component {
@@ -137,7 +138,7 @@ class Register extends React.Component {
 
         <div>
           <div>Password</div>
-          <input name="db_password" placeholder="Enter Password.." type="text" value={this.state.db_password} onChange={e => { this.setState({ db_password: e.target.value }); }} />
+          <input name="db_password" placeholder="Enter Password.." type="password" value={this.state.db_password} onChange={e => { this.setState({ db_password: e.target.value }); }} />
         </div>
         <div>
           <div>Date of Birth</div>
@@ -161,7 +162,7 @@ class Register extends React.Component {
           <option value="one_s_4">What is your favourite toy?</option>
           <option value="one_other">Other</option> {/* new option */}
         </select>
-        {this.state.db_security_q_1 == "one_other" && (
+        {this.state.db_security_q_1 === "one_other" && (
           <div>
             <div>Other Security Question</div>
             <input name="other_security_q_1" placeholder="Enter your security question.." type="text"
@@ -213,7 +214,7 @@ class Register extends React.Component {
           <option value="three_s_4">What is your favourite colour?</option>
           <option value="three_other">Other</option> {/* new option */}
         </select>
-        {this.state.db_security_q_3 == "three_other" && (
+        {this.state.db_security_q_3 === "three_other" && (
           <div>
             <div>Other Security Question</div>
             <input name="other_security_q_3" placeholder="Enter your security question.." type="text"
@@ -243,31 +244,17 @@ class Register extends React.Component {
         </div>
 
         <button id="addBtn" className="button" onClick={this.interface}>Register</button>
-      </div>
+        <p>
+                    <Link to="/Login">Already have an account?</Link>
+                </p>      </div>
     );
   }
   interface(event) {
     const id = event.target.id;
     const { selectedImage } = this.state;
-    const { db_email } = this.state;
-    const { db_password } = this.state;
-    const { db_phone } = this.state;
-    const { db_security_q_1 } = this.state;
-    const { db_security_q_2 } = this.state;
-    const { db_security_q_3 } = this.state;
-    const { db_answer_1 } = this.state;
-    const { db_answer_2 } = this.state.db_answer_2;
-    const { db_answer_3 } = this.state;
-    const { db_fullname } = this.state;
-    const { db_dob } = this.state;
-    const { db_username } = this.state;
+    
 
-    if (id == 'addBtn')
-
-   /* if (!db_email,!db_password,!db_phone ,!db_answer_1,!db_answer_2,!db_answer_3,!db_fullname,!db_dob,!db_username ) {
-        alert('Please enter all fields');
-        return;
-      }*/
+    if (id === 'addBtn'){}
     if(!selectedImage)
     {
       alert('Select Image');
@@ -352,7 +339,7 @@ class Register extends React.Component {
         })
         .catch((error) => {
           console.error('Error adding data: ', error);
-          alert('Error adding data. Please try again later.');
+          alert('Error . Please try again later.');
         });
     });
   }

@@ -1,7 +1,7 @@
 import './styles.css'
-import React, { createContext } from 'react';
+import React from 'react';
 import startFirebase from './config/firedb';
-import { set, ref, get, child } from 'firebase/database';
+import {  ref, get, child } from 'firebase/database';
 import { Navigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import image1 from './Images/image1.jpg';
@@ -49,13 +49,20 @@ class Login extends React.Component {
     const dbref = ref(this.state.db);
     const lg_username = this.getAllInputs().lg_username;
 
+    if (!lg_username) {
+      alert('Please enter a username');
+      return;
+    }
+  
+    
+
     get(child(dbref, 'Customer/' + lg_username))
       .then((snapshot) => {
         if (snapshot.exists()) {
 
           const { db_security_q_1 } = snapshot.val();
           console.log("*****************", db_security_q_1);
-          alert('db_sequirity_1: ' + db_security_q_1);
+          alert('First Question: ' + db_security_q_1);
         } else {
           alert('No data found');
         }
@@ -69,13 +76,19 @@ class Login extends React.Component {
     const dbref = ref(this.state.db);
     const lg_username = this.getAllInputs().lg_username;
 
+    if (!lg_username) {
+      alert('Please enter a username');
+      return;
+    }
+  
+
     get(child(dbref, 'Customer/' + lg_username))
       .then((snapshot) => {
         if (snapshot.exists()) {
 
           const { db_security_q_2 } = snapshot.val();
           console.log("*****************", db_security_q_2);
-          alert('db_sequirity_2: ' + db_security_q_2);
+          alert('Second Question: ' + db_security_q_2);
         } else {
           alert('No data found');
         }
@@ -89,13 +102,19 @@ class Login extends React.Component {
     const dbref = ref(this.state.db);
     const lg_username = this.getAllInputs().lg_username;
 
+    if (!lg_username) {
+      alert('Please enter a username');
+      return;
+    }
+  
+
     get(child(dbref, 'Customer/' + lg_username))
       .then((snapshot) => {
         if (snapshot.exists()) {
 
           const { db_security_q_3 } = snapshot.val();
           console.log("*****************", db_security_q_3);
-          alert('db_sequirity_1: ' + db_security_q_3);
+          alert('Third Question: ' + db_security_q_3);
         } else {
           alert('No data found');
         }
@@ -143,7 +162,7 @@ class Login extends React.Component {
         <div>
 
           <div>Password</div>
-          <input name="lg_password" placeholder="Enter Password.." type="text" value={this.state.lg_password} onChange={e => { this.setState({ lg_password: e.target.value }); }} />
+          <input name="lg_password" placeholder="Enter Password.." type="password" value={this.state.lg_password} onChange={e => { this.setState({ lg_password: e.target.value }); }} />
         </div>
         <div>
           <div>First Security Answer </div>
@@ -192,6 +211,7 @@ class Login extends React.Component {
 
 
           </div>
+          <br></br>
           <div>
           {images.map((image, index) => (
             <img
@@ -199,7 +219,7 @@ class Login extends React.Component {
               src={image.src}
               alt={image.alt}
               onClick={() => this.handleImageClick(image)}
-              style={{ border: selectedImage === image ? '2px solid red' : 'none' }}
+              style={{ border: selectedImage == image ? '2px solid red' : 'none' }}
             />
           ))}
           <p>Selected Image: {selectedImage ? selectedImage.alt : 'None'}</p>
@@ -218,7 +238,6 @@ class Login extends React.Component {
   }
   interface(event) {
     const id = event.target.id;
-    const { selectedImage } = this.state;
 
     if (id == 'verifyBtn')
       this.selectData();
@@ -229,17 +248,28 @@ class Login extends React.Component {
   }
 
     getAllInputs() {
-      const inputs = {
-        lg_username: this.state.lg_username,
-        lg_password: this.state.lg_password,
-        answerOne : this.state.answerOne,
-      answerTwo : this.state.answerTwo,
-      answerThree : this.state.answerThree,
-      selectedImage: this.state.selectedImage.alt
+      const { lg_username, lg_password } = this.state;
+    
+      // Add null check before accessing properties
+      const first_hint = this.state.first_hint ? this.state.first_hint : '';
+      const answerOne = this.state.answerOne ? this.state.answerOne : '';
+      const answerTwo = this.state.answerTwo ? this.state.answerTwo : '';
+      const answerThree = this.state.answerThree ? this.state.answerThree : '';
+     // const selectedImage = this.state.selectedImage.alt;
+     const selectedImage = this.state.selectedImage ? this.state.selectedImage.alt : '';
+
+    
+      return {
+        lg_username,
+        lg_password,
+        first_hint,
+        answerOne,
+        answerTwo,
+        answerThree,
+        selectedImage
       };
-     
-      return inputs;
     }
+    
     
 
   
@@ -253,19 +283,20 @@ class Login extends React.Component {
 
     get(child(dbref, 'Customer/' + lg_username)).then((snapshot) => {
       if (snapshot.exists()) {
-        const { UserName, db_password , db_answer_1, db_answer_2, db_answer_3 ,db_image } = snapshot.val();
+        const {  db_password , db_answer_1, db_answer_2, db_answer_3 ,db_image } = snapshot.val();
         const { lg_username, lg_password } = this.state;
 
-        if (this.state.selectedImage === null) {
+        if (this.state.selectedImage == null) {
           alert("Please select an image.");
           return;
         }
+        
         if ((db_password == lg_password) && (db_answer_1 == answerOne) && (db_answer_2 == answerTwo) && (db_answer_3 == answerThree) && (db_image == selectedImage) ) {
           console.log("Login successful");
           this.setState({ isLoggedIn: true });
 
-          alert("Login successful" + lg_username);
-        } else if(db_password != lg_password) {
+          alert("Login successful " + lg_username);
+        } else if(db_password !== lg_password) {
           console.log("Invalid Username or password");
           alert("Invalid Username or password");
         }
