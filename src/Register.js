@@ -125,7 +125,8 @@ class Register extends React.Component {
 
     }
     return (
-      <div style={{ textAlign: 'left' }} className='bc'>
+      <div style={{ textAlign: 'center' }}>
+      <div >
 
         <div>
           <div>
@@ -152,7 +153,7 @@ class Register extends React.Component {
           <div>Phone Number</div>
           <input name="db_phone" placeholder="Enter Phone Number.." type="text" value={this.state.db_phone} onChange={e => { this.setState({ db_phone: e.target.value }); }} />
         </div>
-        <l1>Choose First Security Questions..</l1>
+        <l1>First Question</l1>
         <br />
         <select name="db_security_q_1" value={this.state.db_security_q_1} onChange={(e) => { this.setState({ db_security_q_1: e.target.value }) }}>
           <option value="">Please select your question</option>
@@ -175,10 +176,10 @@ class Register extends React.Component {
 
         <br />
         <div>
-          <div>First Answer</div>
+          <div>Answer</div>
           <input name="db_answer_1" placeholder="Enter Answer.." type="text" value={this.state.db_answer_1} onChange={e => { this.setState({ db_answer_1: e.target.value }); }} />
         </div>
-        <l1>Choose Second Security Questions..</l1>
+        <l1>Second Question</l1>
         <br />
         <select name="db_security_q_2" value={this.state.db_security_q_2} onChange={(e) => { this.setState({ db_security_q_2: e.target.value }) }}>
           <option value="">Please select your question</option>
@@ -204,7 +205,7 @@ class Register extends React.Component {
           <div>Second Answer</div>
           <input name="db_answer_2" placeholder="Enter Answer.." type="text" value={this.state.db_answer_2} onChange={e => { this.setState({ db_answer_2: e.target.value }); }} />
         </div>
-        <l1>Choose Third Security Questions..</l1>
+        <l1>Third Question</l1>
         <br />
         <select name="db_security_q_3" value={this.state.db_security_q_3} onChange={(e) => { this.setState({ db_security_q_3: e.target.value }) }}>
           <option value="">Please select your question</option>
@@ -230,6 +231,7 @@ class Register extends React.Component {
           <div>Third Answer</div>
           <input name="db_answer_3" placeholder="Enter Answer.." type="text" value={this.state.db_answer_3} onChange={e => { this.setState({ db_answer_3: e.target.value }); }} />
         </div>
+        </div>
         <div>
           {images.map((image, index) => (
             <img
@@ -247,6 +249,7 @@ class Register extends React.Component {
         <p>
                     <Link to="/Login">Already have an account?</Link>
                 </p>      </div>
+  
     );
   }
   interface(event) {
